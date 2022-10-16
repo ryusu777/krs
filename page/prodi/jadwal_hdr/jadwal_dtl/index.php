@@ -1,6 +1,6 @@
 <?php 
     if (!isset($no_jadwal_hdr)) {
-        redirect("not-found");
+        include "page/not-found.php";
         exit;
     }
     $result = $mysqli->query("SELECT 
@@ -64,7 +64,7 @@
                     <td><?= $row['smt_matkul'] ?></td>
                     <td><?= $row['nama_dosen'] ?></td>
                     <td>
-                        <a href="/<?= $folder ?>/prodi/jadwal_hdr/jadwal_dtl/edit?no_jadwal_dtl=<?= $row['no_jadwal_dtl'] ?>">
+                        <a href="/<?= $folder ?>/prodi/jadwal_hdr/jadwal_dtl/edit?no_jadwal_detail=<?= $row['no_jadwal_detail'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">
                                 <span class="tf-icons bx bx-edit-alt"></span>
                             </button>

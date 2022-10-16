@@ -23,8 +23,8 @@
         </div>
     </div>
 </div>
-<h1>Include Grid Jadwal_Hdr disini</h1>
 <?php 
     $no_prodi = $row['no_prodi'];
+    include "page/prodi/jadwal_hdr/index.php";
     include "page/prodi/matkul/index.php";
 ?>

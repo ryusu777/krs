@@ -1,4 +1,8 @@
 <?php 
+if (!isset($_GET['no_jadwal_hdr'])) {
+    redirect("not-found");
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement = $mysqli->prepare("INSERT INTO jadwal_dtl 
         (kode_ruang, 
@@ -19,24 +23,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
     $statement->execute();
     $statement->close();
-    redirect("dosen");
+    $no_jadwal_hdr = $_POST['no_jadwal_hdr'];
+    redirect("prodi/jadwal_hdr/detail?no_jadwal_hdr=$no_jadwal_hdr");
     exit;
 }
 else {
-    if (!isset($_GET['no_jadwal_hdr'])) {
+    $ruangResult = $mysqli->query("SELECT * FROM ruang");
+    $no_jadwal_hdr = $_GET['no_jadwal_hdr'];
+    $jadwalHdrResult = $mysqli->query("SELECT * FROM jadwal_hdr WHERE no_jadwal_hdr=$no_jadwal_hdr");
+    $rowJadwalHdr = $jadwalHdrResult->fetch_assoc();
+    if (!$rowJadwalHdr) {
         redirect("not-found");
         exit;
     }
-    $ruangResult = $mysqli->query("SELECT * FROM ruang");
-    $no_jadwal_hdr = $_GET['no_jadwal_hdr'];
+    $tahun_kurikulum = $rowJadwalHdr['tahun_kurikulum'];
+    $no_prodi = $rowJadwalHdr['no_prodi'];
     $kelasResult = $mysqli->query("SELECT 
         m.nama_matkul,
         k.kode_kelas,
         d.nama_dosen
         FROM kelas k
-        JOIN jadwal_hdr jh ON jh.no_jadwal_hdr=$no_jadwal_hdr
-        JOIN matkul m ON m.tahun_kurikulum_matkul=jh.tahun_kurikulum
-        JOIN dosen d ON d.nid_dosen=k.nid_dosen");
+        JOIN matkul m ON m.tahun_kurikulum_matkul=$tahun_kurikulum AND k.kode_matkul=m.kode_matkul
+        JOIN dosen d ON d.nid_dosen=k.nid_dosen
+        WHERE m.no_prodi=$no_prodi");
 ?>
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">

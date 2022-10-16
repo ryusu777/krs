@@ -1,11 +1,11 @@
 <?php 
-    $result = $mysqli->query("SELECT * FROM jadwal_hdr h JOIN prodi p ON h.no_prodi=p.no_prodi");
+    $result = $mysqli->query("SELECT * FROM jadwal_hdr h JOIN prodi p ON h.no_prodi=p.no_prodi WHERE h.no_prodi=$no_prodi");
 ?>
-<div class="card">
+<div class="card mb-4">
     <div class="card-header row justify-content-between">
         <h5 class="col">Daftar Jadwal Header</h5>
         <div class="col-lg-2 col-md-3 col-sm-4 row justify-content-end">
-            <a href="/<?= $folder ?>/prodi/jadwal_hdr/new">
+            <a href="/<?= $folder ?>/prodi/jadwal_hdr/new?no_prodi=<?= $no_prodi ?>">
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah
                 </button>
@@ -16,7 +16,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>No Jadwal Header</th>
+                    <th>No</th>
                     <th>Nama Prodi</th>
                     <th>Semester</th>
                     <th>Tahun Akademik</th>
@@ -26,10 +26,11 @@
             </thead>
             <tbody class="table-border-bottom-0">
                 <?php 
+                    $i = 1;
                     while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                    <td><?= $row['no_jadwal_hdr'] ?></td>
+                    <td><?= $i++ ?></td>
                     <td><?= $row['nama_prodi'] ?></td>
                     <td><?= $row['semester'] ?></td>
                     <td><?= $row['tahun_akademik'] ?></td>

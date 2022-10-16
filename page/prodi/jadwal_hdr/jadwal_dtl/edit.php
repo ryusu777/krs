@@ -27,7 +27,7 @@ else {
         include "page/not-found.php";
         exit;
     }
-    $result = $mysqli->query("SELECT * FROM jadwal_dtl WHERE no_jadwal_detail=".$_GET['no_jadwal_dtl']);
+    $result = $mysqli->query("SELECT * FROM jadwal_dtl WHERE no_jadwal_detail=".$_GET['no_jadwal_detail']);
     $row = $result->fetch_assoc();
     if (!$row) {
         include "page/not-found.php";
@@ -35,14 +35,22 @@ else {
     }
     $ruangResult = $mysqli->query("SELECT * FROM ruang");
     $no_jadwal_hdr = $row['no_jadwal_hdr'];
+    $jadwalHdrResult = $mysqli->query("SELECT * FROM jadwal_hdr WHERE no_jadwal_hdr=$no_jadwal_hdr");
+    $rowJadwalHdr = $jadwalHdrResult->fetch_assoc();
+    if (!$rowJadwalHdr) {
+        redirect("not-found");
+        exit;
+    }
+    $tahun_kurikulum = $rowJadwalHdr['tahun_kurikulum'];
+    $no_prodi = $rowJadwalHdr['no_prodi'];
     $kelasResult = $mysqli->query("SELECT 
         m.nama_matkul,
         k.kode_kelas,
         d.nama_dosen
         FROM kelas k
-        JOIN jadwal_hdr jh ON jh.no_jadwal_hdr=$no_jadwal_hdr
-        JOIN matkul m ON m.tahun_kurikulum_matkul=jh.tahun_kurikulum
-        JOIN dosen d ON d.nid_dosen=k.nid_dosen");
+        JOIN matkul m ON m.tahun_kurikulum_matkul=$tahun_kurikulum AND k.kode_matkul=m.kode_matkul
+        JOIN dosen d ON d.nid_dosen=k.nid_dosen
+        WHERE m.no_prodi=$no_prodi");
 ?>
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
@@ -51,15 +59,16 @@ else {
     <div class="card-body">
         <form method="post">
             <input name="no_jadwal_hdr" type="hidden" value="<?= $row['no_jadwal_hdr'] ?>">
+            <input name="no_jadwal_detail" type="hidden" value="<?= $row['no_jadwal_detail'] ?>">
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Ruang</label>
                 <div class="col-sm-10">
                     <input class="form-control" list="ruang-list" placeholder="Cari..." name="kode_ruang" value="<?= $row['kode_ruang'] ?>">
                     <datalist id="ruang-list">
                         <?php 
-                            while ($row = $ruangResult->fetch_assoc()) {
+                            while ($rowRuang = $ruangResult->fetch_assoc()) {
                         ?>
-                        <option value="<?= $row['kode_ruang'] ?>"><?= $row['nama_ruang']?></option>
+                        <option value="<?= $rowRuang['kode_ruang'] ?>"><?= $rowRuang['nama_ruang']?></option>
                         <?php
                             }
                         ?>
@@ -84,12 +93,12 @@ else {
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Kelas</label>
                 <div class="col-sm-10">
-                    <input class="form-control" list="kelas-list" placeholder="Cari..." name="kode_kelas">
+                    <input value="<?= $row['kode_kelas'] ?>" class="form-control" list="kelas-list" placeholder="Cari..." name="kode_kelas">
                     <datalist id="kelas-list">
                         <?php 
                             while ($rowKelas = $kelasResult->fetch_assoc()) {
                         ?>
-                        <option value="<?= $rowKelas['kode_kelas'] ?>" <?php if ($rowKelas['kode_kelas'] == $row['kode_kelas'] ) echo 'selected'; ?>><?= $rowKelas['nama_matkul'].', '.$rowKelas['nama_dosen'] ?></option>
+                        <option value="<?= $rowKelas['kode_kelas'] ?>"><?= $rowKelas['nama_matkul'].', '.$rowKelas['nama_dosen'] ?></option>
                         <?php
                             }
                         ?>

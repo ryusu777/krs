@@ -1,37 +1,36 @@
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $statement = $mysqli->prepare("INSERT INTO jadwal_hdr (no_jadwal_hdr, no_prodi, semester, tahun_akademik, tahun_kurikulum) VALUES (?, ?, ?, ?, ?)");
-    $statement->bind_param('sssss', $_POST['no_jadwal_hdr'], $_POST['no_prodi'], $_POST['semester'], $_POST['tahun_akademik'], $_POST['tahun_kurikulum']);
+    $statement = $mysqli->prepare("INSERT INTO jadwal_hdr (no_prodi, semester, tahun_akademik, tahun_kurikulum) VALUES (?, ?, ?, ?)");
+    $statement->bind_param('ssss', $_POST['no_prodi'], $_POST['semester'], $_POST['tahun_akademik'], $_POST['tahun_kurikulum']);
     $statement->execute();
     $statement->close();
-    redirect('prodi/jadwal_hdr/');
+    $no_prodi = $_POST['no_prodi'];
+    redirect("prodi/detail?no_prodi=$no_prodi");
     exit;
 }
 else {
+    $result = $mysqli->query("SELECT * FROM prodi WHERE no_prodi='".$_GET['no_prodi']."'");
+    $row = $result->fetch_assoc();
+    if (!$row) {
+        include "page/not-found.php";
+        exit;
+    }
 ?>
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="mb-0">Basic Layout</h5>
-        <small class="text-muted float-end">Default label</small>
+        <h5 class="mb-0">Tambah Jadwal Prodi</h5>
+        <small class="text-muted float-end"><?= $row['nama_prodi'] ?></small>
     </div>
     <div class="card-body">
         <form method="post">
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-name">No Jadwal Header</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" id="basic-default-name" placeholder="No Jadwal Header" name="no_jadwal_hdr">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-name">No Prodi</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="basic-default-name" placeholder="No Prodi" name="no_prodi">
-                </div>
-            </div>
+            <input type="hidden" name="no_prodi" value=<?= $_GET['no_prodi'] ?>>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-default-company">Semester</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="basic-default-company" placeholder="Semester" name="semester">
+                    <select class="form-select" name="semester">
+                        <option value="GENAP">Genap</option>
+                        <option value="GANJIL">Ganjil</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
