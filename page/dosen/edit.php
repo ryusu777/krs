@@ -11,14 +11,13 @@ else {
     $result = $mysqli->query("SELECT * FROM dosen WHERE nid_dosen=".$_GET['nid']);
     $row = $result->fetch_assoc();
     if (!$row) {
-        redirect('not-found');
+        include "page/not-found.php";
         exit;
     }
 ?>
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="mb-0">Basic Layout</h5>
-        <small class="text-muted float-end">Default label</small>
+        <h5 class="mb-0">Ubah Dosen</h5>
     </div>
     <div class="card-body">
         <form method="post">
