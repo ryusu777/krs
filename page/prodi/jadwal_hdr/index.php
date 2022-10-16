@@ -35,11 +35,23 @@
                     <td><?= $row['tahun_akademik'] ?></td>
                     <td><?= $row['tahun_kurikulum'] ?></td>
                     <td>
+                        <a href="/<?= $folder ?>/prodi/jadwal_hdr/detail?no_jadwal_hdr=<?= $row['no_jadwal_hdr'] ?>">
+                            <button type="button" class="btn btn-icon btn-outline-primary">
+                                <span class="tf-icons bx bx-show"></span>
+                            </button>
+                        </a>
                         <a href="/<?= $folder ?>/prodi/jadwal_hdr/edit?no_jadwal_hdr=<?= $row['no_jadwal_hdr'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">
                                 <span class="tf-icons bx bx-edit-alt"></span>
                             </button>
                         </a>
+                        <?php 
+                        form_delete_start('delete-'.$row['no_jadwal_hdr'], "/$folder/prodi/jadwal_hdr/delete", 'post');
+                        ?>
+                            <input type="hidden" name="no_jadwal_hdr" value="<?= $row['no_jadwal_hdr'] ?>">
+                        <?php 
+                        form_delete_end();
+                        ?>
                     </td>
                 </tr>
                 <?php
