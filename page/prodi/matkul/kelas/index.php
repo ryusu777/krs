@@ -36,6 +36,13 @@
                                 <span class="tf-icons bx bx-edit-alt"></span>
                             </button>
                         </a>
+                        <?php 
+                        form_delete_start('delete-'.$row['kode_kelas'], "/$folder/prodi/matkul/kelas/delete", 'post');
+                        ?>
+                            <input type="hidden" name="kode_kelas" value="<?= $row['kode_kelas'] ?>">
+                        <?php 
+                        form_delete_end();
+                        ?>
                     </td>
                 </tr>
                 <?php
