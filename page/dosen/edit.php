@@ -12,7 +12,7 @@ else {
     $row = $result->fetch_assoc();
     if (!$row) {
         redirect('not-found');
-        return;
+        exit;
     }
 ?>
 <div class="card mb-4">
