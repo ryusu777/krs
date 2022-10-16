@@ -45,6 +45,11 @@
                     <td><?= $row['smt_matkul'] ?></td>
                     <td><?= $row['tahun_kurikulum_matkul'] ?></td>
                     <td>
+                        <a href="/<?= $folder ?>/prodi/matkul/detail?kode_matkul=<?= $row['kode_matkul'] ?>">
+                            <button type="button" class="btn btn-icon btn-outline-primary">
+                                <span class="tf-icons bx bx-show"></span>
+                            </button>
+                        </a>
                         <a href="/<?= $folder ?>/prodi/matkul/edit?kode_matkul=<?= $row['kode_matkul'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">
                                 <span class="tf-icons bx bx-edit-alt"></span>

@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 else {
-    $result = $mysqli->query("SELECT * FROM kelas WHERE kode_kelas=".$_GET['kode_kelas']);
+    $result = $mysqli->query("SELECT * FROM kelas WHERE kode_kelas='".$_GET['kode_kelas']."'");
     $row = $result->fetch_assoc();
     if (!$row) {
         redirect('not-found');
@@ -22,16 +22,11 @@ else {
     </div>
     <div class="card-body">
         <form method="post">
+            <input value="<?= $row['kode_matkul'] ?>" type="hidden" name="kode_matkul">
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-default-name">Kode Kelas</label>
                 <div class="col-sm-10">
                     <input value="<?= $row['kode_kelas'] ?>" type="text" class="form-control" placeholder="Kode Kelas" name="kode_kelas" disabled>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-company">Kode Matkul</label>
-                <div class="col-sm-10">
-                    <input value="<?= $row['kode_matkul'] ?>" type="text" class="form-control" placeholder="Kode Matkul" name="kode_matkul">
                 </div>
             </div>
             <div class="row mb-3">

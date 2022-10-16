@@ -1,5 +1,4 @@
 <?php 
-    $no_jadwal_hdr = 1;
     if (!isset($no_jadwal_hdr)) {
         redirect("not-found");
         exit;

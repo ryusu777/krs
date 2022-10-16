@@ -1,11 +1,18 @@
 <?php 
-    $result = $mysqli->query("SELECT * FROM kelas k JOIN dosen d ON k.nid_dosen=d.nid_dosen");
+    if (!isset($kode_matkul)) {
+        include "page/not-found.php";
+        exit;
+    }
+    $result = $mysqli->query("SELECT * FROM kelas k 
+        JOIN dosen d ON k.nid_dosen=d.nid_dosen
+        JOIN matkul m ON m.kode_matkul=k.kode_matkul
+        WHERE k.kode_matkul='$kode_matkul'");
 ?>
 <div class="card">
     <div class="card-header row justify-content-between">
         <h5 class="col">Daftar Kelas</h5>
         <div class="col-lg-2 col-md-3 col-sm-4 row justify-content-end">
-            <a href="/<?= $folder ?>/prodi/matkul/kelas/new">
+            <a href="/<?= $folder ?>/prodi/matkul/kelas/new?kode_matkul=<?= $kode_matkul ?>">
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah
                 </button>
@@ -17,8 +24,8 @@
             <thead>
                 <tr>
                     <th>Kode Kelas</th>
-                    <th>Kode Matkul</th>
-                    <th>Nama Dosen</th>
+                    <th>Matkul</th>
+                    <th>Dosen</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -28,7 +35,7 @@
                 ?>
                 <tr>
                     <td><?= $row['kode_kelas'] ?></td>
-                    <td><?= $row['kode_matkul'] ?></td>
+                    <td><?= $row['nama_matkul'] ?></td>
                     <td><?= $row['nama_dosen'] ?></td>
                     <td>
                         <a href="/<?= $folder ?>/prodi/matkul/kelas/edit?kode_kelas=<?= $row['kode_kelas'] ?>">

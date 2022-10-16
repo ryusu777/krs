@@ -6,7 +6,7 @@
         exit;
     }
 ?>
-<a href="/<?= $folder ?>/prodi">Kembali ke prodi</a>
+<a href="/<?= $folder ?>/prodi">Kembali ke daftar prodi</a>
 <div class="card mb-4 mt-4">
     <div class="card-body">
         <div class="row mb-3">
