@@ -11,7 +11,7 @@ else {
     $result = $mysqli->query("SELECT * FROM ruang WHERE kode_ruang=".$_GET['nid']);
     $row = $result->fetch_assoc();
     if (!$row) {
-        redirect('not-found');
+        include "page/not-found.php";
         return;
     }
 ?>

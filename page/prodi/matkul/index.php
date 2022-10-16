@@ -1,12 +1,19 @@
 <?php 
-    $result = $mysqli->query("SELECT * FROM matkul");
+    if(!isset($no_prodi)) {
+        include "page/not-found.php";
+        exit;
+    }
+    $result = $mysqli->query("SELECT * 
+        FROM matkul m
+        JOIN prodi p ON m.no_prodi=p.no_prodi
+        WHERE m.no_prodi=$no_prodi");
 ?>
 
 <div class="card">
     <div class="card-header row justify-content-between">
         <h5 class="col">Daftar Mata Kuliah</h5>
         <div class="col-lg-2 col-md-3 col-sm-4 row justify-content-end">
-            <a href="/<?= $folder ?>/prodi/matkul/new">
+            <a href="/<?= $folder ?>/prodi/matkul/new?no_prodi=<?= $no_prodi ?>">
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah
                 </button>
@@ -17,12 +24,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Kode Mata Kuliah</th>
-                    <th>Tahun Kurikulum Mata Kuliah</th>
-                    <th>No Prodi</th>
+                    <th>Kode Matkul</th>
+                    <th>Nama Matkul</th>
+                    <th>Prodi</th>
                     <th>SKS</th>
-                    <th>Semester Mata Kuliah</th>
-                    <th>Nama Mata Kuliah</th>
+                    <th>Semester</th>
+                    <th>Tahun Kurikulum</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -32,13 +39,13 @@
                 ?>
                 <tr>
                     <td><?= $row['kode_matkul'] ?></td>
-                    <td><?= $row['tahun_kurikulum_matkul'] ?></td>
-                    <td><?= $row['no_prodi'] ?></td>
+                    <td><?= $row['nama_matkul'] ?></td>
+                    <td><?= $row['nama_prodi'] ?></td>
                     <td><?= $row['sks'] ?></td>
                     <td><?= $row['smt_matkul'] ?></td>
-                    <td><?= $row['nama_matkul'] ?></td>
+                    <td><?= $row['tahun_kurikulum_matkul'] ?></td>
                     <td>
-                        <a href="/<?= $folder ?>/prodi/matkul/edit?nid=<?= $row['kode_matkul'] ?>">
+                        <a href="/<?= $folder ?>/prodi/matkul/edit?kode_matkul=<?= $row['kode_matkul'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">
                                 <span class="tf-icons bx bx-edit-alt"></span>
                             </button>

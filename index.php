@@ -26,7 +26,7 @@ if (file_exists("page/$content.php")) {
 } else if (file_exists("page/$content/index.php")) {
     include "page/$content/index.php";
 } else {
-    include 'page/404.php';
+    include 'page/not-found.php';
 }
 
 include 'layouts/end.php';

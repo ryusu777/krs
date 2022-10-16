@@ -24,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 else {
     if (!isset($_GET['no_jadwal_detail'])) {
-        redirect("not-found");
+        include "page/not-found.php";
         exit;
     }
     $result = $mysqli->query("SELECT * FROM jadwal_dtl WHERE no_jadwal_detail=".$_GET['no_jadwal_dtl']);
     $row = $result->fetch_assoc();
     if (!$row) {
-        redirect('not-found');
+        include "page/not-found.php";
         exit;
     }
     $ruangResult = $mysqli->query("SELECT * FROM ruang");
@@ -46,7 +46,7 @@ else {
 ?>
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="mb-0">Tambah Jadwal</h5>
+        <h5 class="mb-0">Edit Jadwal</h5>
     </div>
     <div class="card-body">
         <form method="post">
