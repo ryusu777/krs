@@ -52,7 +52,3 @@
         </div>
     </div>
 </div>
-<?php 
-    $kode_matkul = $row['kode_matkul'];
-    include "page/prodi/matkul/kelas/index.php";
-?>
