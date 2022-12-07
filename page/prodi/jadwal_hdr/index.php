@@ -21,6 +21,7 @@
                     <th>Semester</th>
                     <th>Tahun Akademik</th>
                     <th>Tahun Kurikulum</th>
+                    <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
