@@ -18,6 +18,7 @@
                 <tr>
                     <th>NID Dosen</th>
                     <th>Nama Dosen</th>
+                    <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                 <tr>
                     <td><?= $row['nid_dosen'] ?></td>
                     <td><?= $row['nama_dosen'] ?></td>
+                    <td><?= $row['dibuat_pada'] ?></td>
                     <td>
                         <a href="/<?= $folder ?>/dosen/edit?nid=<?= $row['nid_dosen'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">

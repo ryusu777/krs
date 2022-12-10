@@ -1,10 +1,10 @@
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $statement = $mysqli->prepare("INSERT INTO tkad (kode_tkad) VALUES (?)");
-    $statement->bind_param('s', $_POST['kode_tkad']);
+    $statement = $mysqli->prepare("INSERT INTO takd (kode_takd) VALUES (?)");
+    $statement->bind_param('s', $_POST['kode_takd']);
     $statement->execute();
     $statement->close();
-    redirect("tkad");
+    redirect("takd");
     exit;
 }
 else {
@@ -19,7 +19,7 @@ else {
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-default-name">Kode Tahun Akademik</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="basic-default-name" placeholder="kode" name="kode_tkad">
+                    <input type="text" class="form-control" id="basic-default-name" placeholder="Kode TAKD" name="kode_takd">
                 </div>
             </div>
             <div class="row justify-content-end">

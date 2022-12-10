@@ -1,6 +1,6 @@
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $statement = $mysqli->prepare("INSERT INTO jadwal_hdr (kode_takd, nid_dosen, no_prodi, semester, tahun_akademik, tahun_kurikulum) VALUES (?, ?, ?, ?)");
+    $statement = $mysqli->prepare("INSERT INTO jadwal_hdr (kode_takd, nid_dosen, no_prodi, semester, tahun_akademik, tahun_kurikulum) VALUES (?, ?, ?, ?, ?, ?)");
     $statement->bind_param('ssssss', $_POST['kode_takd'], $_POST['nid_dosen'], $_POST['no_prodi'], $_POST['semester'], $_POST['tahun_akademik'], $_POST['tahun_kurikulum']);
     $statement->execute();
     $statement->close();
