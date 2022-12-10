@@ -18,6 +18,7 @@
                 <tr>
                     <th>No Prodi</th>
                     <th>Nama Prodi</th>
+                    <th>Di Buat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                 <tr>
                     <td><?= $row['no_prodi'] ?></td>
                     <td><?= $row['nama_prodi'] ?></td>
+                    <td><?= $row['dibuat_pada'] ?></td>
                     <td>
                         <a href="/<?= $folder ?>/prodi/detail?no_prodi=<?= $row['no_prodi'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">

@@ -5,18 +5,20 @@ if (!isset($_GET['no_jadwal_hdr'])) {
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement = $mysqli->prepare("INSERT INTO jadwal_dtl 
-        (kode_ruang, 
+        (kode_ruang,
+        kode_matkul, 
         no_jadwal_hdr, 
-        kode_kelas, 
+        nid_dosen, 
         hari, 
         jam_mulai, 
         jam_selesai) 
         VALUES 
-        (?, ?, ?, ?, ?, ?)");
-    $statement->bind_param('ssssss', 
-        $_POST['kode_ruang'], 
+        (?, ?, ?, ?, ?, ?, ?)");
+    $statement->bind_param('sssssss', 
+        $_POST['kode_ruang'],
+        $_POST['kode_matkul'], 
         $_POST['no_jadwal_hdr'],
-        $_POST['kode_kelas'],
+        $_POST['nid_dosen'],
         $_POST['hari'],
         $_POST['jam_mulai'],
         $_POST['jam_selesai']
@@ -40,10 +42,10 @@ else {
     $no_prodi = $rowJadwalHdr['no_prodi'];
     $kelasResult = $mysqli->query("SELECT 
         m.nama_matkul,
-        k.kode_kelas,
+        k.nama_ruang,
         d.nama_dosen
         FROM kelas k
-        JOIN matkul m ON m.tahun_kurikulum_matkul=$tahun_kurikulum AND k.kode_matkul=m.kode_matkul
+        JOIN matkul m ON m.kode_matkul=$tahun_kurikulum AND k.nama_ruang=m.nama_ruang
         JOIN dosen d ON d.nid_dosen=k.nid_dosen
         WHERE m.no_prodi=$no_prodi");
 ?>

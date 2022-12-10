@@ -1,7 +1,7 @@
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $statement = $mysqli->prepare("INSERT INTO matkul (kode_matkul, tahun_kurikulum_matkul, no_prodi, sks, smt_matkul, nama_matkul) VALUES (?, ?, ?, ?, ?, ?)");
-    $statement->bind_param('sssiss', $_POST['kode_matkul'], $_POST['tahun_kurikulum_matkul'], $_POST['no_prodi'], $_POST['sks'], $_POST['smt_matkul'], $_POST['nama_matkul']);
+    $statement = $mysqli->prepare("INSERT INTO matkul (kode_matkul, kode_kurikulum, no_prodi, sks, smt_matkul, nama_matkul) VALUES (?, ?, ?, ?, ?, ?)");
+    $statement->bind_param('sssiss', $_POST['kode_matkul'], $_POST['kode_kurikulum'], $_POST['no_prodi'], $_POST['sks'], $_POST['smt_matkul'], $_POST['nama_matkul']);
     $statement->execute();
     $statement->close();
     $no_prodi = $_POST['no_prodi'];
@@ -31,9 +31,9 @@ else {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-company">Tahun Kurikulum</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-company">Kode Kurikulum</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="basic-default-company" placeholder="Tahun Kurikulum" name="tahun_kurikulum_matkul">
+                    <input type="text" class="form-control" id="basic-default-company" placeholder="Kode Kurikulum" name="kode_kurikulum">
                 </div>
             </div>
             <div class="row mb-3">

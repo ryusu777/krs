@@ -27,9 +27,9 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-default-company">Tahun Kurikulum</label>
+            <label class="col-sm-2 col-form-label" for="basic-default-company">Kode Kurikulum</label>
             <div class="col-sm-10">
-                <input value="<?= $row['tahun_kurikulum_matkul'] ?>" type="text" class="form-control" placeholder="Tahun Kurikulum" name="tahun_kurikulum_matkul" disabled>
+                <input value="<?= $row['kode_matkul'] ?>" type="text" class="form-control" placeholder="Kode Kurikulum" name="kode_matkul" disabled>
             </div>
         </div>
         <div class="row mb-3">

@@ -8,8 +8,8 @@ if (!$row) {
 $no_prodi = $row['no_prodi'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $statement = $mysqli->prepare("UPDATE matkul SET tahun_kurikulum_matkul=?, sks=?, smt_matkul=?, nama_matkul=? WHERE kode_matkul=?");
-    $statement->bind_param('sisss', $_POST['tahun_kurikulum_matkul'], $_POST['sks'], $_POST['smt_matkul'], $_POST['nama_matkul'], $_POST['kode_matkul']);
+    $statement = $mysqli->prepare("UPDATE matkul SET kode_matkul=?, sks=?, smt_matkul=?, nama_matkul=? WHERE kode_matkul=?");
+    $statement->bind_param('sisss', $_POST['kode_matkul'], $_POST['sks'], $_POST['smt_matkul'], $_POST['nama_matkul'], $_POST['kode_matkul']);
     $statement->execute();
     $statement->close();
 
@@ -34,9 +34,9 @@ else {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-company">Tahun Kurikulum</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-company">Kode Kurikulum</label>
                 <div class="col-sm-10">
-                    <input value="<?= $row['tahun_kurikulum_matkul'] ?>" type="text" class="form-control" placeholder="Tahun Kurikulum" name="tahun_kurikulum_matkul">
+                    <input value="<?= $row['kode_matkul'] ?>" type="text" class="form-control" placeholder="Kode Kurikulum" name="kode_matkul">
                 </div>
             </div>
             <div class="row mb-3">

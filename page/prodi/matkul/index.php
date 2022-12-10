@@ -25,11 +25,12 @@
             <thead>
                 <tr>
                     <th>Kode Matkul</th>
-                    <th>Nama Matkul</th>
-                    <th>Prodi</th>
+                    <th>Kode Kurikulum</th>
+                    <th>No Prodi</th>
                     <th>SKS</th>
                     <th>Semester</th>
-                    <th>Tahun Kurikulum</th>
+                    <th>Nama Matkul</th>
+                    <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -39,11 +40,12 @@
                 ?>
                 <tr>
                     <td><?= $row['kode_matkul'] ?></td>
-                    <td><?= $row['nama_matkul'] ?></td>
-                    <td><?= $row['nama_prodi'] ?></td>
+                    <td><?= $row['kode_kurikulum'] ?></td>
+                    <td><?= $row['no_prodi'] ?></td>
                     <td><?= $row['sks'] ?></td>
                     <td><?= $row['smt_matkul'] ?></td>
-                    <td><?= $row['tahun_kurikulum_matkul'] ?></td>
+                    <td><?= $row['nama_matkul'] ?></td>
+                    <td><?= $row['dibuat_pada'] ?></td>
                     <td>
                         <a href="/<?= $folder ?>/prodi/matkul/detail?kode_matkul=<?= $row['kode_matkul'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">

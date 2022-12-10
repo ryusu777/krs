@@ -1,12 +1,12 @@
 <?php 
-    $result = $mysqli->query("SELECT * FROM ruang");
+    $result = $mysqli->query("SELECT * FROM takd");
 ?>
 
 <div class="card">
     <div class="card-header row justify-content-between">
-        <h5 class="col">Daftar Ruang</h5>
+        <h5 class="col">Daftar Tahun Akademik</h5>
         <div class="col-lg-2 col-md-3 col-sm-4 row justify-content-end">
-            <a href="/<?= $folder ?>/ruang/new">
+            <a href="/<?= $folder ?>/takd/new">
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah
                 </button>
@@ -17,8 +17,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Kode Ruang</th>
-                    <th>Nama Ruang</th>
+                    <th>Kode Tahun Akademik</th>
                     <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
@@ -28,19 +27,13 @@
                     while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                    <td><?= $row['kode_ruang'] ?></td>
-                    <td><?= $row['nama_ruang'] ?></td>
+                    <td><?= $row['kode_takd'] ?></td>
                     <td><?= $row['dibuat_pada'] ?></td>
                     <td>
-                        <a href="/<?= $folder ?>/ruang/edit?nid=<?= $row['kode_ruang'] ?>">
-                            <button type="button" class="btn btn-icon btn-outline-primary">
-                                <span class="tf-icons bx bx-edit-alt"></span>
-                            </button>
-                        </a>
                         <?php 
-                        form_delete_start('delete-'.$row['kode_ruang'], "/$folder/ruang/delete", 'post');
+                        form_delete_start('delete-'.$row['kode_takd'], "/$folder/takd/delete", 'post');
                         ?>
-                            <input type="hidden" name="kode_ruang" value="<?= $row['kode_ruang'] ?>">
+                            <input type="hidden" name="kode_takd" value="<?= $row['kode_takd'] ?>">
                         <?php 
                         form_delete_end();
                         ?>

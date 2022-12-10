@@ -95,5 +95,12 @@
                 <div>Ruang</div>
             </a>
         </li>
+
+        <li class="menu-item">
+            <a href="/<?= $folder ?>/takd" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-building"></i>
+                <div>Tahun Akademik</div>
+            </a>
+        </li>
     </ul>
 </aside>
