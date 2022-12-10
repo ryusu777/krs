@@ -2,7 +2,7 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement = $mysqli->prepare("UPDATE jadwal_dtl SET
         kode_ruang=?, 
-        kode_kelas=?, 
+        kode_matkul=?, 
         hari=?, 
         jam_mulai=?, 
         jam_selesai=?
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ");
     $statement->bind_param('ssssss', 
         $_POST['kode_ruang'], 
-        $_POST['kode_kelas'],
+        $_POST['kode_matkul'],
         $_POST['hari'],
         $_POST['jam_mulai'],
         $_POST['jam_selesai'],

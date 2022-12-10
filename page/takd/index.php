@@ -1,11 +1,12 @@
 <?php 
-    $result = $mysqli->query("SELECT * FROM prodi");
+    $result = $mysqli->query("SELECT * FROM takd");
 ?>
+
 <div class="card">
     <div class="card-header row justify-content-between">
-        <h5 class="col">Daftar Prodi</h5>
+        <h5 class="col">Daftar Ruang</h5>
         <div class="col-lg-2 col-md-3 col-sm-4 row justify-content-end">
-            <a href="/<?= $folder ?>/prodi/new">
+            <a href="/<?= $folder ?>/ruang/new">
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah
                 </button>
@@ -16,9 +17,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>No Prodi</th>
-                    <th>Nama Prodi</th>
-                    <th>Di Buat Pada</th>
+                    <th>Kode Tahun Akademik</th>
+                    <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -27,24 +27,17 @@
                     while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                    <td><?= $row['no_prodi'] ?></td>
-                    <td><?= $row['nama_prodi'] ?></td>
-                    <td><?= $row['dibuat_pada'] ?></td>
+                    <td><?= $row['kode_tkad'] ?></td>
                     <td>
-                        <a href="/<?= $folder ?>/prodi/detail?no_prodi=<?= $row['no_prodi'] ?>">
-                            <button type="button" class="btn btn-icon btn-outline-primary">
-                                <span class="tf-icons bx bx-show"></span>
-                            </button>
-                        </a>
-                        <a href="/<?= $folder ?>/prodi/edit?no_prodi=<?= $row['no_prodi'] ?>">
+                        <a href="/<?= $folder ?>/ruang/edit?nid=<?= $row['kode_tkad'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">
                                 <span class="tf-icons bx bx-edit-alt"></span>
                             </button>
                         </a>
                         <?php 
-                        form_delete_start('delete-'.$row['no_prodi'], "/$folder/prodi/delete", 'post');
+                        form_delete_start('delete-'.$row['kode_tkad'], "/$folder/tkad/delete", 'post');
                         ?>
-                            <input type="hidden" name="no_prodi" value="<?= $row['no_prodi'] ?>">
+                            <input type="hidden" name="kode_tkad" value="<?= $row['kode_tkad'] ?>">
                         <?php 
                         form_delete_end();
                         ?>
@@ -57,3 +50,4 @@
         </table>
     </div>
 </div>
+

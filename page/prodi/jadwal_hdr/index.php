@@ -17,6 +17,8 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Kode Tahun Akademik</th>
+                    <th>Nama Dosen</th>
                     <th>Nama Prodi</th>
                     <th>Semester</th>
                     <th>Tahun Akademik</th>
@@ -32,10 +34,12 @@
                 ?>
                 <tr>
                     <td><?= $i++ ?></td>
+                    <td><?= $row['nama_dosen'] ?></td>
                     <td><?= $row['nama_prodi'] ?></td>
                     <td><?= $row['semester'] ?></td>
                     <td><?= $row['tahun_akademik'] ?></td>
                     <td><?= $row['tahun_kurikulum'] ?></td>
+                    <td><?= $row['dibuat_pada'] ?></td>
                     <td>
                         <a href="/<?= $folder ?>/prodi/jadwal_hdr/detail?no_jadwal_hdr=<?= $row['no_jadwal_hdr'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">

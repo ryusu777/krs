@@ -30,7 +30,7 @@
                     <th>SKS</th>
                     <th>Semester</th>
                     <th>Nama Matkul</th>
-                    <th>Tahun Kurikulum</th>
+                    <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -45,6 +45,7 @@
                     <td><?= $row['sks'] ?></td>
                     <td><?= $row['smt_matkul'] ?></td>
                     <td><?= $row['nama_matkul'] ?></td>
+                    <td><?= $row['dibuat_pada'] ?></td>
                     <td>
                         <a href="/<?= $folder ?>/prodi/matkul/detail?kode_matkul=<?= $row['kode_matkul'] ?>">
                             <button type="button" class="btn btn-icon btn-outline-primary">

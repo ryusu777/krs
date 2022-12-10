@@ -46,6 +46,7 @@
                     <th>Sks</th>
                     <th>Semester</th>
                     <th>Dosen</th>
+                    <th>Dibuat Pada</th>
                     <th>Action</th>
                 </tr>
             </thead>
