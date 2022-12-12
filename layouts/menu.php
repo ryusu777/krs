@@ -90,6 +90,20 @@
         </li>
 
         <li class="menu-item">
+            <a href="/<?= $folder ?>/matkul" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-content"></i>
+                <div>Matkul</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="/<?= $folder ?>/jadwal" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-content"></i>
+                <div>Jadwal</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
             <a href="/<?= $folder ?>/ruang" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building"></i>
                 <div>Ruang</div>
@@ -100,6 +114,27 @@
             <a href="/<?= $folder ?>/takd" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building"></i>
                 <div>Tahun Akademik</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="/<?= $folder ?>/kurikulum" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-building"></i>
+                <div>Kurikulum</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="/<?= $folder ?>/jadwal_dtl_log" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-content"></i>
+                <div>Jadwal Detail Log</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="/<?= $folder ?>/assets/backup.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-download"></i>
+                <div>Backup</div>
             </a>
         </li>
     </ul>

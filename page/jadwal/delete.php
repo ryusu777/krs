@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->execute();
     $statement->close();
     $no_prodi = $row['no_prodi'];
-    redirect("prodi/detail?no_prodi=$no_prodi");
+    redirect("jadwal?no_prodi=$no_prodi");
     exit;
 }
 ?>

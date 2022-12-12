@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         hari, 
         jam_mulai, 
         jam_selesai) 
-        VALUES 
+        VALUES
         (?, ?, ?, ?, ?, ?, ?)");
     $statement->bind_param('sssssss', 
         $_POST['kode_ruang'],
@@ -26,28 +26,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->execute();
     $statement->close();
     $no_jadwal_hdr = $_POST['no_jadwal_hdr'];
-    redirect("prodi/jadwal_hdr/detail?no_jadwal_hdr=$no_jadwal_hdr");
+    redirect("jadwal/detail?no_jadwal_hdr=$no_jadwal_hdr");
     exit;
 }
 else {
     $ruangResult = $mysqli->query("SELECT * FROM ruang");
     $no_jadwal_hdr = $_GET['no_jadwal_hdr'];
-    $jadwalHdrResult = $mysqli->query("SELECT * FROM jadwal_hdr WHERE no_jadwal_hdr=$no_jadwal_hdr");
+    $jadwalHdrResult = $mysqli->query("SELECT * FROM jadwal_hdr jh 
+        JOIN kurikulum k ON jh.kode_kurikulum = k.kode_kurikulum 
+        WHERE no_jadwal_hdr='$no_jadwal_hdr'");
     $rowJadwalHdr = $jadwalHdrResult->fetch_assoc();
+    $dosenResult =  $mysqli->query("SELECT * FROM dosen");
+    $matkulResult =  $mysqli->query("SELECT * FROM matkul");
     if (!$rowJadwalHdr) {
         redirect("not-found");
         exit;
     }
-    $tahun_kurikulum = $rowJadwalHdr['tahun_kurikulum'];
+    $tahun_kurikulum = $rowJadwalHdr['tahun_berlaku'];
     $no_prodi = $rowJadwalHdr['no_prodi'];
-    $kelasResult = $mysqli->query("SELECT 
-        m.nama_matkul,
-        k.nama_ruang,
-        d.nama_dosen
-        FROM kelas k
-        JOIN matkul m ON m.kode_matkul=$tahun_kurikulum AND k.nama_ruang=m.nama_ruang
-        JOIN dosen d ON d.nid_dosen=k.nid_dosen
-        WHERE m.no_prodi=$no_prodi");
+    // $kelasResult = $mysqli->query("SELECT 
+    //     m.nama_matkul,
+    //     d.nama_dosen
+    //     FROM jadwal_dtl jd
+    //     JOIN matkul m ON m.tahun_kurikulum_matkul=$tahun_kurikulum AND jd.kode_matkul=m.kode_matkul
+    //     JOIN dosen d ON d.nid_dosen=jd.nid_dosen
+    //     WHERE m.no_prodi=$no_prodi");
 ?>
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
@@ -87,21 +90,6 @@ else {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Kelas</label>
-                <div class="col-sm-10">
-                    <input class="form-control" list="kelas-list" placeholder="Cari..." name="kode_kelas">
-                    <datalist id="kelas-list">
-                        <?php 
-                            while ($row = $kelasResult->fetch_assoc()) {
-                        ?>
-                        <option value="<?= $row['kode_kelas'] ?>"><?= $row['nama_matkul'].', '.$row['nama_dosen'] ?></option>
-                        <?php
-                            }
-                        ?>
-                    </datalist>
-                </div>
-            </div>
-            <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Jam Mulai</label>
                 <div class="col-sm-10">
                     <input class="form-control" type="time" name="jam_mulai" id="jam-mulai-input">
@@ -111,6 +99,36 @@ else {
                 <label class="col-sm-2 col-form-label">Jam Selesai</label>
                 <div class="col-sm-10">
                     <input class="form-control" type="time" name="jam_selesai" id="jam-selesai-input">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">NID Dosen</label>
+                <div class="col-sm-10">
+                    <input class="form-control" list="dosen-list" placeholder="Cari..." name="nid_dosen">
+                    <datalist id="dosen-list">
+                        <?php 
+                            while ($row = $dosenResult->fetch_assoc()) {
+                        ?>
+                        <option value="<?= $row['nid_dosen'] ?>"><?= $row['nama_dosen']?></option>
+                        <?php
+                            }
+                        ?>
+                    </datalist>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Mata Kuliah</label>
+                <div class="col-sm-10">
+                    <input class="form-control" list="matkul-list" placeholder="Cari..." name="kode_matkul">
+                    <datalist id="matkul-list">
+                        <?php 
+                            while ($row = $matkulResult->fetch_assoc()) {
+                        ?>
+                        <option value="<?= $row['kode_matkul'] ?>"><?= $row['nama_matkul']?></option>
+                        <?php
+                            }
+                        ?>
+                    </datalist>
                 </div>
             </div>
             <div class="row justify-content-end">

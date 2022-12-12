@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->execute();
     $statement->close();
     $no_jadwal_hdr = $row['no_jadwal_hdr'];
-    redirect("prodi/jadwal_hdr/detail?no_jadwal_hdr=$no_jadwal_hdr");
+    redirect("jadwal/detail?no_jadwal_hdr=$no_jadwal_hdr");
     exit;
 }
 ?>

@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine on 
-	RewriteRule ^$ index.php [L] 
+	RewriteRule ^$ index.php [L]
 	RewriteRule ^assets/([a-z/]+)$ /assets/$1 [L]
 	RewriteRule ^([a-z\-\_/]+)$ index.php?content=$1 [L,QSA]
 </IfModule>

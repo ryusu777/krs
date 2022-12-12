@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statement->execute();
     $statement->close();
     $no_prodi = $_POST['no_prodi'];
-    redirect("prodi/detail?no_prodi=$no_prodi");
+    redirect("matkul?no_prodi=$no_prodi");
     exit;
 }
 else {

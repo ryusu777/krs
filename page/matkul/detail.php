@@ -29,7 +29,7 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-company">Kode Kurikulum</label>
             <div class="col-sm-10">
-                <input value="<?= $row['kode_matkul'] ?>" type="text" class="form-control" placeholder="Kode Kurikulum" name="kode_matkul" disabled>
+                <input value="<?= $row['kode_kurikulum'] ?>" type="text" class="form-control" placeholder="Kode Kurikulum" name="kode_kurikulum" disabled>
             </div>
         </div>
         <div class="row mb-3">

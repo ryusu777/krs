@@ -1,8 +1,8 @@
 <?php
 /* Membuat variabel, ubah sesuai dengan nama host dan database pada hosting */
-$host = 'localhost';
+$host = 'db';
 $user = 'root';
-$pass = '';
+$pass = 'SIMONGROUP';
 $db = 'krs';
 $folder = 'krs';
 

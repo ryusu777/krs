@@ -1,11 +1,11 @@
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $statement = $mysqli->prepare("INSERT INTO jadwal_hdr (kode_takd, nid_dosen, no_prodi, semester, tahun_akademik, tahun_kurikulum) VALUES (?, ?, ?, ?, ?, ?)");
-    $statement->bind_param('ssssss', $_POST['kode_takd'], $_POST['nid_dosen'], $_POST['no_prodi'], $_POST['semester'], $_POST['tahun_akademik'], $_POST['tahun_kurikulum']);
+    $statement = $mysqli->prepare("CALL InsertJadwal(?, ?, ?, ?, ?)");
+    $statement->bind_param('sssss', $_POST['kode_takd'], $_POST['nid_dosen'], $_POST['no_prodi'], $_POST['semester'], $_POST['kode_kurikulum']);
     $statement->execute();
     $statement->close();
     $no_prodi = $_POST['no_prodi'];
-    redirect("prodi/detail?no_prodi=$no_prodi");
+    redirect("jadwal?no_prodi=$no_prodi");
     exit;
 }
 else {
@@ -25,6 +25,24 @@ else {
         <form method="post">
             <input type="hidden" name="no_prodi" value=<?= $_GET['no_prodi'] ?>>
             <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Tahun Akademik</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="basic-default-name" placeholder="Tahun Akademik" name="kode_takd">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-company">NID Dosen</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="basic-default-company" placeholder="NID Dosen" name="nid_dosen">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-company">No Prodi</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="basic-default-company" placeholder="No Prodi" name="no_prodi">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-default-company">Semester</label>
                 <div class="col-sm-10">
                     <select class="form-select" name="semester">
@@ -34,15 +52,9 @@ else {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-name">Tahun Akademik</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-company">Kode Kurikulum</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="basic-default-name" placeholder="Tahun Akademik" name="tahun_akademik">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-company">Tahun Kurikulum</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="basic-default-company" placeholder="Tahun Kurikulum" name="tahun_kurikulum">
+                    <input type="text" class="form-control" id="basic-default-company" placeholder="Kode Kurikulum" name="kode_kurikulum">
                 </div>
             </div>
             <div class="row justify-content-end">
